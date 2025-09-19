@@ -159,9 +159,27 @@ select salesperson,product from sales where product='laptop';
 | Bob         | Laptop  |
 +-------------+---------+
 13.Find total sale amount per salesperson per region, only where it exceeds $500.
-
+select sum(saleamount) from sales group by salesperson,region having sum(saleamount)>500;
++-----------------+
+| sum(saleamount) |
++-----------------+
+|         1410.00 |
+|         1425.00 |
+|         2100.00 |
+|         1200.00 |
+|          575.00 |
++-----------------+
 14.Find salespersons who sold at least 2 different products in a single region.
-
+select salesperson from sales group by salesperson,region having count(distinct product)>=2;
++-------------+
+| salesperson |
++-------------+
+| Alice       |
+| Bob         |
+| Charlie     |
+| David       |
+| Eve         |
++-------------+
 15.Find products that were sold in more than one region.
 select product from sales group by product having count(distinct region)>1;
 +----------+
