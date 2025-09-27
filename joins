@@ -125,7 +125,19 @@ select departments.department_name, employees.name
 | Marketing       | NULL    |
 +-----------------+---------+
 9.	Show employee names and department names, replacing NULLs with 'Unassigned'.
-
+select e.name,coalesce(d.department_name,'Unassigned') from employees e left join departments d on e.department_id=d.department_id;
++---------+------------------------------------------+
+| name    | coalesce(d.department_name,'Unassigned') |
++---------+------------------------------------------+
+| Alice   | HR                                       |
+| Bob     | IT                                       |
+| Charlie | HR                                       |
+| David   | Finance                                  |
+| Eve     | Unassigned                               |
+| Frank   | Sales                                    |
+| Grace   | IT                                       |
+| Hannah  | Unassigned                               |
++---------+------------------------------------------+
 10.	Find departments where no employees are assigned.
 select departments.department_name, employees.name
     -> from departments
